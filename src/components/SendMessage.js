@@ -24,7 +24,7 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
       <div style={styles.section}>
         <Container>
           <Header as='h2'>THANK YOU!</Header>
-          SEE YOUR POST AT <a href="http://localhost:3000/liveboard">http://localhost.com:3000/liveboard </a>
+          SEE YOUR POST AT <a href="http://leaveunnc.space/liveboard">http://leaveunnc.space/liveboard </a>
           <br/>
           OR <a href="#" onClick={handleAnotherOne}>SEND ANOTHER ONE?</a> 
         </Container>
@@ -35,12 +35,12 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
       
       <div style={styles.section}>
           <Container>
-            <Grid stackable>
+            <Grid stackable doubling>
               <Grid.Row>
-                <Grid.Column style={styles.inp} width={14}>
+                <Grid.Column style={styles.inp} mobile={16} computer={14}>
                   <Input size='huge' onChange={handleOnChange} fluid transparent placeholder='CAN YOU DESCRIBE YOUR FEELING?' />
                 </Grid.Column>
-                <Grid.Column width={1}>
+                <Grid.Column mobile={2} computer={1}>
                   <Button 
                     basic 
                     disabled={status === 'unsent' || status === 'sent'} 
