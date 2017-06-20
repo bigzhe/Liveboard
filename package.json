@@ -47,6 +47,6 @@
     "eslint-plugin-react": "^5.0.1",
     "express": "^4.13.3",
     "webpack": "^1.9.11",
-    "webpack-dev-middleware": "^1.2.0"
+    "webpack-dev-middleware": "^1.10.2"
   }
 }
