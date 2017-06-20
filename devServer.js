@@ -11,12 +11,12 @@ var socket_io = require('socket.io');
 
 var bodyParser = require('body-parser')
 
-
+const PRIVATE_IP = '10.130.3.153'
 const app = new express();
 const port = 3000;
 
 var server = require('http').Server(app);
-server.listen(3000, error => {
+server.listen(3000, PRIVATE_IP, error => {
   console.log('listening on port 3000')
 });
 
