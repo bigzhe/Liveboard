@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 // import {fetchMessages} from '../actions'
-import Dashboard from '../components/dashboard'
+import Dashboard from '../components/Dashboard'
 import * as api from '../api'
 
 const mapStateToProps = (state) => {
