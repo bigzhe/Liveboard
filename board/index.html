@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: FZXS24;
-  src: url(http://localhost:3000/api/liveboard/js/FZXS24.ttf);
+  src: url(http://139.59.216.82/api/liveboard/js/FZXS24.ttf);
 }
 /*body {
   position: relative;
@@ -101,8 +101,8 @@ a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; 
 </script>
 
 
-<script src='http://localhost:3000/api/liveboard/js/d3.min.js'></script>
-<script src='http://localhost:3000/api/liveboard/js/cloud.min.js'></script>
+<script src='http://139.59.216.82/api/liveboard/js/d3.min.js'></script>
+<script src='http://139.59.216.82/api/liveboard/js/cloud.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js'></script>
 
 
@@ -163,7 +163,7 @@ a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; 
 <script>
   // get the initial data
   let data = [];
-  $.get('http://localhost:3000/api/messages', (response) => {
+  $.get('http://139.59.216.82/api/messages', (response) => {
     data = response
     go()
     setTimeout(function(){ go() }, 500);

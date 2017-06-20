@@ -1,4 +1,4 @@
-const URL = 'http://localhost:3000/api/'
+const URL = 'http://139.59.216.82/api/'
 
 export const fetchMessages = () => {
   const request = new Request(URL+'messages', {
