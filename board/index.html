@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Leave</title>
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+<!--<link href="http://localhost:3000/api/liveboard/js/Zfull-GB.ttf" rel="stylesheet">-->
+
+<style>
+
+@font-face {
+  font-family: FZXS24;
+  src: url(http://localhost:3000/api/liveboard/js/FZXS24.ttf);
+}
+/*body {
+  position: relative;
+  font-family: "Helvetica Neue", sans-serif;
+  width: 960px;
+  margin: auto;
+  margin-bottom: 1em;
+  margin-top: 20px;
+}
+#presets a { border-left: solid #666 1px; padding: 0 10px; }
+#presets a.first { border-left: none; }
+#keyword { width: 300px; }
+#fetcher { width: 500px; }
+#keyword, #go { font-size: 1.5em; }
+#text { width: 100%; height: 100px; }
+p.copy { font-size: small; }
+#form { font-size: small; position: relative; }
+hr { border: none; border-bottom: solid #ccc 1px; }
+a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; }
+#angles line, #angles path, #angles circle { stroke: #666; }
+#angles text { fill: #333; }
+#angles path.drag { fill: #666; cursor: move; }
+#angles { text-align: center; margin: 0 auto; width: 350px; }
+#angles input, #max { width: 42px; }*/
+
+</style>
+
+<div id="vis"></div>
+
+<form hidden id="form">
+
+<p style="position: absolute; right: 0; top: 0" id="status"></p>
+
+<div style="text-align: center">
+  <div id="presets"></div>
+  <div id="custom-area">
+    <p><label for="text">Paste your text below!</label>
+    <p><textarea id="text">
+
+    </textarea>
+    <button id="go" type="submit">Go!</button>
+  </div>
+</div>
+
+<hr>
+
+<div hidden style="float: right; text-align: right">
+  <p><label for="max">Number of words:</label> <input type="number" value="250" min="1" id="max">
+  <p><label for="per-line"><input checked type="checkbox" id="per-line"> One word per line</label>
+  <p><label for="colours">Colours:</label> <a href="#" id="random-palette">get random palette</a>
+  <p><label>Download:</label>
+    <button id="download-svg">SVG</button><!-- |
+    <a id="download-png" href="#">PNG</a>-->
+</div>
+
+<div hidden style="float: left">
+  <p><label>Spiral:</label>
+    <label for="archimedean"><input type="radio" name="spiral" id="archimedean" value="archimedean" checked="checked"> Archimedean</label>
+    <label for="rectangular"><input type="radio" name="spiral" id="rectangular" value="rectangular" > Rectangular</label>
+  <p><label for="scale">Scale:</label>
+    <label for="scale-log"><input type="radio" name="scale" id="scale-log" value="log" checked="checked"> log n</label>
+    <label for="scale-sqrt"><input type="radio" name="scale" id="scale-sqrt" value="sqrt"> √n</label>
+    <label for="scale-linear"><input type="radio" name="scale" id="scale-linear" value="linear"> n</label>
+  <p><label for="font">Font:</label> 
+  <input type="text" id="font" value="VT323, FZXS24">
+</div>
+
+<div hidden id="angles">
+  <p><input type="number" id="angle-count" value="5" min="1"> <label for="angle-count">orientations</label>
+    <label for="angle-from">from</label> <input type="number" id="angle-from" value="0" min="-90" max="90"> °
+    <label for="angle-to">to</label> <input type="number" id="angle-to" value="0" min="-90" max="90"> °
+</div>
+
+<hr style="clear: both">
+
+<p style="float: right"><a href="about/">How the Word Cloud Generator Works</a>.
+<p style="float: left">Copyright &copy; <a href="http://www.jasondavies.com/">Jason Davies</a> | <a href="../privacy/">Privacy Policy</a>. The generated word clouds may be used for any purpose.
+
+</form>
+
+<!--<button onclick="appendMessage()">Add one</button>-->
+<button onclick="go()">Go</button>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-compat/3.0.0-alpha1/jquery.min.js'></script>
+
+<script>
+  const HEIGHT = $(document).height(); // returns height of HTML document (same as pageHeight in screenshot)
+  const WIDTH = $(document).width(); // returns width of HTML document (same as pageWidth in screenshot)
+</script>
+
+
+<script src='http://localhost:3000/api/liveboard/js/d3.min.js'></script>
+<script src='http://localhost:3000/api/liveboard/js/cloud.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js'></script>
+
+
+<script>
+  const reducer = (state = [], action) => {
+    switch (action.type) {
+      case 'ADD_MESSAGE':
+        return [...state, action.data]
+      case 'UPDATE_MESSAGE':
+        return state.map(m =>
+          (m._id === action.data._id)
+            ? action.data
+            : m
+        )
+      case 'DELETE_MESSAGE':
+        const index = state.findIndex(m => m._id === action._id)
+        console.log('delete index', index)
+        return [...state.slice(0, index),
+        ...state.slice(index + 1)]
+      case 'DELETE_ALL_MESSAGES':
+        return []
+      case 'INIT_MESSAGES':
+        return action.data
+      default:
+        return state
+    }
+  }
+
+</script>
+
+<script>
+  const go = () => {
+    const text = data.map(d => d.text).join('\n')
+    const div = document.getElementById('text')
+    div.innerHTML = text
+    document.getElementById('go').click();
+  }
+
+  function appendMessage(msg) {
+    msg = msg || 'hehe';
+    console.log('append:', msg)
+    var div = document.getElementById('text');
+    var text = `why you not here
+      hehe
+      find me 
+      and i'll eat you
+      hahahahaha
+      interesting`;
+    // div.innerHTML += '\n' + msg;
+    div.innerHTML += '\n' + msg + Math.random();
+    // div.innerHTML = text + '\n' + msg + Math.random();
+    document.getElementById('go').click();
+  }
+
+</script>
+
+
+<script>
+  // get the initial data
+  let data = [];
+  $.get('http://localhost:3000/api/messages', (response) => {
+    data = response
+    go()
+    setTimeout(function(){ go() }, 500);
+  })
+
+</script>
+
+<script>
+  var socket = io();
+  socket.on('action', function (action) {
+    console.log(action);
+    if (action.type !== 'message') {
+      data = reducer(data, action)
+      go()
+    }
+  })
+
+</script>
+
