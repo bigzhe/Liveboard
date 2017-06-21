@@ -38,10 +38,11 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
             <Grid stackable doubling>
               <Grid.Row>
                 <Grid.Column style={styles.inp} mobile={16} computer={14}>
-                  <Input size='huge' onChange={handleOnChange} fluid transparent placeholder='CAN YOU DESCRIBE YOUR FEELING?' />
+                  <Input size='massive' onChange={handleOnChange} fluid transparent placeholder='CAN YOU DESCRIBE YOUR FEELING?' />
                 </Grid.Column>
                 <Grid.Column mobile={2} computer={1}>
                   <Button 
+                    size='massive'
                     basic 
                     disabled={status === 'unsent' || status === 'sent'} 
                     loading={status === 'sending'} 
@@ -65,7 +66,7 @@ const styles = {
     // backgroundColor: '#2dcb89',
     textAligh: 'center',
     display: 'block',
-    padding: '23em 2em'
+    // padding: '23em 2em'
   },
   inp: {
     border: '0px solid rgba(34,36,38,.15)',
