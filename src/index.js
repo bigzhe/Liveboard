@@ -34,7 +34,7 @@ render (
     <BrowserRouter>
       <MuiThemeProvider >
       <div>
-        <Route exact path="/" component={App} />
+        {/*<Route exact path="/" component={App} />*/}
         {/*<Route path="/liveboard" component={LiveboardContainer} />*/}
         <Route path="/dashboard" component={DashboardContainer} />
       </div>

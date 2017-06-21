@@ -154,6 +154,12 @@ app.get('/liveboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'board', 'index.html'));
 });
 
+app.get('/', (req, res) => {
+  console.log('sent submitting page')
+  io.emit('action', {type: 'message', data: 'someone linked to the server'})
+  res.sendFile(path.join(__dirname, 'submit', 'index.html'));
+});
+
 app.use('/api', router);
 
 app.get('/*', (req, res) => {
