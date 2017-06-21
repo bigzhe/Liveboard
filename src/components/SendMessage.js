@@ -35,7 +35,8 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
       
       <div style={styles.section}>
           <Container>
-            <Grid stackable doubling>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <Grid>
               <Grid.Row>
                 <Grid.Column style={styles.inp} mobile={16} computer={14}>
                   <Input size='massive' onChange={handleOnChange} fluid transparent placeholder='CAN YOU DESCRIBE YOUR FEELING?' />
