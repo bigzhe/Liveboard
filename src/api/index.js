@@ -1,4 +1,5 @@
-const URL = 'http://139.59.216.82/api/'
+// const URL = 'http://139.59.216.82/api/'
+const URL = 'http://128.199.223.123/api/'
 
 export const fetchMessages = () => {
   const request = new Request(URL+'messages', {
