@@ -48,7 +48,7 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
           <br/>
           <RaisedButton 
           label={status === 'sending' ? 'Wait' : 'Submit'}
-          disabled={status === 'unsent' || status === 'sent'} 
+          disabled={status === 'unsent' || status === 'sent' || status === 'sending'} 
           onClick={handleClick}
           primary={true}
           />
