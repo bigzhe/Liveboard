@@ -96,8 +96,8 @@ a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-compat/3.0.0-alpha1/jquery.min.js'></script>
 
 <script>
-  const HEIGHT = $(document).height(); // returns height of HTML document (same as pageHeight in screenshot)
-  const WIDTH = $(document).width(); // returns width of HTML document (same as pageWidth in screenshot)
+  var HEIGHT = $(document).height(); // returns height of HTML document (same as pageHeight in screenshot)
+  var WIDTH = $(document).width(); // returns width of HTML document (same as pageWidth in screenshot)
 </script>
 
 
@@ -107,7 +107,7 @@ a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; 
 
 
 <script>
-  const reducer = (state = [], action) => {
+  var reducer = (state = [], action) => {
     switch (action.type) {
       case 'ADD_MESSAGE':
         return [...state, action.data]
@@ -118,7 +118,7 @@ a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; 
             : m
         )
       case 'DELETE_MESSAGE':
-        const index = state.findIndex(m => m._id === action._id)
+        var index = state.findIndex(m => m._id === action._id)
         console.log('delete index', index)
         return [...state.slice(0, index),
         ...state.slice(index + 1)]
@@ -134,9 +134,9 @@ a.active { text-decoration: none; color: #000; font-weight: bold; cursor: text; 
 </script>
 
 <script>
-  const go = () => {
-    const text = data.map(d => d.text).join('\n')
-    const div = document.getElementById('text')
+  var go = () => {
+    var text = data.map(d => d.text).join('\n')
+    var div = document.getElementById('text')
     div.innerHTML = text
     document.getElementById('go').click();
   }
