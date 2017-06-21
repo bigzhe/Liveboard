@@ -1,5 +1,7 @@
 import React from 'react'
 import { Input, Button, Container, Grid, Header } from 'semantic-ui-react'
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchNextStatus, dispatchResetStatus}) => {
   let text = ''
@@ -7,6 +9,9 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
     text = event.target.value
     if (text !== '' && status == 'unsent') {
       dispatchNextStatus()
+    }
+    if (text === '') {
+      dispatchResetStatus()
     }
   }
   const handleClick = () => {
@@ -33,16 +38,29 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
   } else {
     return (
       
-      <div style={styles.section}>
-          <Container>
-            <Grid container>
+    <div style={styles.section}>
+        <Container>
+          <TextField
+            floatingLabelText="CAN YOU DESCRIBE YOUR FEELING?"
+            fullWidth={true}
+            onChange={handleOnChange}
+          />
+          <br/>
+          <RaisedButton 
+          label={status === 'sending' ? 'Wait' : 'Submit'}
+          disabled={status === 'unsent' || status === 'sent'} 
+          onClick={handleClick}
+          primary={true}
+          />
+        </Container>
+          {/*<Container>
+            <Grid stackable>
               <Grid.Row>
-                <Grid.Column style={styles.inp} mobile={16} computer={14}>
-                  <Input size='massive' onChange={handleOnChange} fluid transparent placeholder='CAN YOU DESCRIBE YOUR FEELING?' />
+                <Grid.Column style={styles.inp} width={14}>
+                  <Input size='huge' onChange={handleOnChange} fluid transparent placeholder='CAN YOU DESCRIBE YOUR FEELING?' />
                 </Grid.Column>
-                <Grid.Column mobile={2} computer={1}>
+                <Grid.Column width={1}>
                   <Button 
-                    size='massive'
                     basic 
                     disabled={status === 'unsent' || status === 'sent'} 
                     loading={status === 'sending'} 
@@ -53,7 +71,7 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-          </Container>
+          </Container>*/}
       </div>
     )
   }
