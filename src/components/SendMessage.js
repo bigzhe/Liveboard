@@ -35,7 +35,6 @@ const SendMessage = ({status, dispatchSetSending, dispatchSendMessage, dispatchN
       
       <div style={styles.section}>
           <Container>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <Grid container>
               <Grid.Row>
                 <Grid.Column style={styles.inp} mobile={16} computer={14}>
@@ -67,7 +66,7 @@ const styles = {
     // backgroundColor: '#2dcb89',
     textAligh: 'center',
     display: 'block',
-    // padding: '23em 2em'
+    padding: '23em 2em'
   },
   inp: {
     border: '0px solid rgba(34,36,38,.15)',
