@@ -1,2 +1,2 @@
 # Liveboard
-The repository for UNNC LEAVE liveboard
+The repository for the leaveunnc.space
